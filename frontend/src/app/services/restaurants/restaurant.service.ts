@@ -1,25 +1,150 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RestaurantInfluencerData } from '../../interfaces/dto/restaurant-influencer-data';
 import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../users/user.service';
+import { RestaurantAdminData } from '../../interfaces/dto/restaurant-admin-data';
+import { RestaurantInfluencerData } from '../../interfaces/dto/restaurant-influencer-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RestaurantService {
-  constructor(private http: HttpClient, private cookies: CookieService) {}
+  baseUrl: string = 'http://localhost:3000/api/restaurants';
+  visibilityRestaurantForm: boolean = false;
 
-  url: string = 'http://localhost:3000/api/films';
+  constructor(
+    private http: HttpClient,
+    private cookies: CookieService,
+    private userService: UserService
+  ) {}
 
-  findAll(){
-    return this.http.get(`${this.url}?token=${this.cookies.get('token')}`)
+  // Visibilidad del formulario
+
+  setVisibilityRestaurantForm(status: boolean) {
+    this.visibilityRestaurantForm = status;
   }
 
-  insert(data: RestaurantInfluencerData){
-    return this.http.post(`${this.url}?token=${this.cookies.get('token')}`, data);
+  getVisibilityRestaurantForm() {
+    return this.visibilityRestaurantForm;
   }
 
-  deleteOne(_id: string){
-    return this.http.delete(`${this.url}/${_id}?token=${this.cookies.get('token')}`);
+  // Estructura de datos
+
+  restuarantAdminData: RestaurantAdminData = {
+    _id: '',
+    name: '',
+    phoneNumber: 0,
+    images: {
+      frontPage: '',
+      miniature: '',
+    },
+    address: {
+      street: '',
+      postalCode: 0,
+      population: '',
+      province: '',
+    },
+    price: {
+      minPrice: 0,
+      maxPrice: 0,
+    },
+    influencerScores: {
+      foodTaste: 0,
+      decoration: 0,
+      service: 0,
+      priceQuality: 0,
+    },
+    usersScores: {
+      average: 0,
+      reviews: 0,
+    },
+    influencerId: '',
+  };
+
+  editRestaurantAdminData(restuarant: RestaurantAdminData) {
+    this.restuarantAdminData = restuarant;
+  }
+
+  clearRestaurantAdminData() {
+    this.restuarantAdminData = {
+      _id: '',
+      name: '',
+      phoneNumber: 0,
+      images: {
+        frontPage: '',
+        miniature: '',
+      },
+      address: {
+        street: '',
+        postalCode: 0,
+        population: '',
+        province: '',
+      },
+      price: {
+        minPrice: 0,
+        maxPrice: 0,
+      },
+      influencerScores: {
+        foodTaste: 0,
+        decoration: 0,
+        service: 0,
+        priceQuality: 0,
+      },
+      usersScores: {
+        average: 0,
+        reviews: 0,
+      },
+      influencerId: '',
+    };
+  }
+
+  // Conexión a BBDD
+
+  getRestaurants() {
+    const token = this.userService.getToken();
+    return this.http.get(`${this.baseUrl}?token=${token}`);
+  }
+
+  getRestaurantsById(id: string) {
+    const token = this.userService.getToken();
+    return this.http.get(`${this.baseUrl}/${id}?token=${token}`);
+  }
+
+  postRestaurantByAdmin(restaurant: RestaurantAdminData) {
+    const token = this.userService.getToken();
+    return this.http.post(`${this.baseUrl}/admin?token=${token}`, restaurant);
+  }
+
+  postRestaurantByInfluencer(restaurant: RestaurantAdminData) {
+    const restaurantTransformated: RestaurantInfluencerData = restaurant;
+    const token = this.userService.getToken();
+    return this.http.post(
+      `${this.baseUrl}?token=${token}`,
+      restaurantTransformated
+    );
+  }
+
+  patchRestaurantByAdmin(restaurant: RestaurantAdminData, id: string) {
+    const token = this.userService.getToken();
+    return this.http.patch(`${this.baseUrl}/admin/${id}?token=${token}`, restaurant);
+  }
+
+  patchRestaurantByInfluencer(restaurant: RestaurantAdminData, id: string) {
+    const restaurantTransformated: RestaurantInfluencerData = restaurant;
+    const token = this.userService.getToken();
+    return this.http.patch(
+      `${this.baseUrl}/${id}?token=${token}`,
+      restaurantTransformated
+    );
+  }
+
+  deleteRestaurantsById(id: string) {
+    const token = this.userService.getToken();
+    const role = this.userService.getRole();
+    if (role === 'admin') {
+      return this.http.delete(`${this.baseUrl}/admin/${id}?token=${token}`);
+    } else {
+      return this.http.delete(`${this.baseUrl}/${id}?token=${token}`);
+    }
   }
 }

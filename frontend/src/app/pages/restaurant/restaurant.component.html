@@ -1,0 +1,50 @@
+@if (restaurant) {
+    <li class="card">
+        <div class="card__header" style="background-image: url({{restaurant.images.frontPage}});">
+        </div>
+        <div class="card__body">
+            <div class="card__columns--logo">
+                <img class="card__logo" [src]="restaurant.images.miniature"/>
+            </div>
+            <div class="card__columns">
+                <div class="card__content">
+                    <h3>Nombre:</h3>
+                    <p>{{restaurant.name}}</p>
+                </div>
+                <div class="card__content">
+                    <h3>Dirección:</h3>
+                    <p>{{restaurant.address.street}}</p>
+                </div>
+                <div class="card__content">
+                    <h3>Teléfono</h3>
+                    <p>{{"+34 "+restaurant.phoneNumber}}</p>
+                </div>
+            </div>
+            <div class="card__columns">
+                <div class="card__content">
+                    <h3>Sabor:</h3>
+                    <p>{{restaurant.influencerScores.foodTaste}}⭐</p>
+                </div>
+                <div class="card__content">
+                    <h3>Servicio:</h3>
+                    <p>{{restaurant.influencerScores.service}}⭐</p>
+                </div>
+                <div class="card__content">
+                    <h3>Decoración:</h3>
+                    <p>{{restaurant.influencerScores.decoration}}⭐</p>
+                </div>
+                <div class="card__content">
+                    <h3>Calidad/Precio:</h3>
+                    <p>{{restaurant.influencerScores.priceQuality}}⭐</p>
+                </div>
+            </div>
+        </div>
+        <div class="card__footer">
+            <app-go-back class="card__button"></app-go-back>
+            <button  class="card__button" (click)="onDelete()">Eliminar</button>
+            <button  class="card__button" (click)="onEdit(restaurant)">Editar</button>
+        </div>
+    </li>
+} @else{
+    <p>Loading...</p>
+}

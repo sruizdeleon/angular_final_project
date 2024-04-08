@@ -1,0 +1,8 @@
+<li class="card">
+    <img [src]="influencer?.images?.miniature" [alt]="influencer?.nickName" class="card__img">
+    <div class="card__content">
+        <h4>{{influencer?.nickName}}</h4>
+        <h4>{{influencer?.accountIG}}</h4>
+    </div>
+    <button class="button" routerLink="/influencers/{{influencer?._id}}">Ver más</button>
+</li>

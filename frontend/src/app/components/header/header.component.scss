@@ -4,8 +4,14 @@ ul {
     align-items: center;
     justify-content: space-around;
     list-style: none;
+    width: 100%;
 }
-
+nav {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1000px;
+}
 a {
     color: white;
     text-decoration: none;

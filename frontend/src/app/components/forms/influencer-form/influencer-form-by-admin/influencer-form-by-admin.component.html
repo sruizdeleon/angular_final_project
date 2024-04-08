@@ -1,0 +1,82 @@
+<form [formGroup]="influencerForm" (ngSubmit)="onSubmit()">
+    @if(newInfluencerAdmin._id !== ""){
+        <p>Id del Influencer</p>
+        <p>{{newInfluencerAdmin._id}}</p>
+    }
+    <fieldset>
+        <label for="nickName">Nombre de influencer</label><br>
+        <input type="text" formControlName="nickName">
+        @if(!influencerForm.get("nickName")?.valid && influencerForm.get("nickName")?.dirty) {
+            <div>
+                Tiene que tener mínimo 2 caracteres y un máximo de 255.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="accountIG">Cuenta de Instagram</label><br>
+        <input type="text" formControlName="accountIG">
+        @if(!influencerForm.get("accountIG")?.valid && influencerForm.get("accountIG")?.dirty) {
+            <div>
+                Tiene que tener mínimo 2 caracteres y un máximo de 255.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="description">Descripción de la cuenta.</label><br>
+        <input type="text" formControlName="description">
+        @if(!influencerForm.get("description")?.valid && influencerForm.get("description")?.dirty) {
+            <div>
+                Tiene que tener mínimo 1 caracteres y un máximo de 400.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="subscribers">Suscriptores</label><br>
+        <input type="number" formControlName="subscribers">
+        @if(!influencerForm.get("subscribers")?.valid && influencerForm.get("subscribers")?.dirty) {
+            <div>
+                Tiene que tener mínimo de 10 suscriptores.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="userId">Id de usuario.</label><br>
+        <input type="text" formControlName="userId">
+        @if(!influencerForm.get("userId")?.valid && influencerForm.get("userId")?.dirty) {
+            <div>
+                Tiene que tener un código alfanumérico de 24 digitos.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="logo">Logo de la cuenta.</label><br>
+        <input type="text" formControlName="logo">
+        @if(!influencerForm.get("logo")?.valid && influencerForm.get("logo")?.dirty) {
+            <div>
+                Tiene que ser una url con un mínimo de 10 caracteres.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="miniature">Imagen de miniatura.</label><br>
+        <input type="text" formControlName="miniature">
+        @if(!influencerForm.get("miniature")?.valid && influencerForm.get("miniature")?.dirty) {
+            <div>
+                Tiene que ser una url con un mínimo de 10 caracteres.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="frontPage">Imagen de portada.</label><br>
+        <input type="text" formControlName="frontPage">
+        @if(!influencerForm.get("frontPage")?.valid && influencerForm.get("frontPage")?.dirty) {
+            <div>
+                Tiene que ser una url con un mínimo de 10 caracteres.
+            </div>
+        }
+    </fieldset>
+    <div>
+        <button type="submit" [disabled]="!influencerForm.valid">Guardar</button>
+        <button type="button" (click)="onClear()">Limpiar</button>
+    </div>
+</form>

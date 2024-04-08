@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
 	findAllRestaurants,
+	findOneRestaurantById,
 	insertRestaurant,
 	modifyRestaurant,
 	modifyUsersScoresRestaurant,
@@ -10,6 +11,7 @@ const {
 const { isAuthenticated, isInfluencer, isAdmin, petitionerCanChangeRestaurant } = require("../middlewares/auth.middleware");
 
 router.get("/", isAuthenticated, findAllRestaurants);
+router.get("/:id", isAuthenticated, findOneRestaurantById);
 router.post("/", isInfluencer, insertRestaurant);
 router.post("/admin", isAdmin, insertRestaurant);
 router.patch("/reviews/:id", isAuthenticated, modifyUsersScoresRestaurant);

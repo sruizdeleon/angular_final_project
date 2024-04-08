@@ -1,0 +1,89 @@
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+
+    &__header {
+        width: 100%;
+        max-width: 1000px;
+        height: 350px;
+        background-position:top;
+        background-position-x: left;
+        background-size: cover;
+        border-radius: 80px 80px 0px 0px;
+    }
+
+
+    &__body {
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: -80px;
+        width: calc(100% - 40px);
+        height: 200px;
+        max-width: calc(1000px - 40px);
+        border-radius: 80px 80px 0px 0px;
+        background-color: #4C9884;
+        padding: 20px;
+        color: white;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    &__columns {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 40%;
+        min-width: 300px;
+    }
+
+    &__columns--logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 20%;
+        min-width: 400px;
+    }
+
+    &__logo {
+        width: 40%;
+        border-radius: 50%;
+    }
+
+    &__content {
+        row-gap: 50px;
+    }
+
+    &__footer {
+        display: flex;
+        gap: 50px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 80px;
+        max-width: 1000px;
+        border-radius: 0px 0px 80px 80px;
+        background-color: #4C9884;
+    }
+
+    &__button {
+        width: 100px;
+        height: 50px;
+        background-color: #8DD1C1;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+    &__button:hover {
+        background-color:#6CB5A2;
+    }
+}

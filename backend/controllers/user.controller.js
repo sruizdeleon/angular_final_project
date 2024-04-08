@@ -36,12 +36,49 @@ async function login(req,res){
             }
             else{
                 const token = jwt.sign({ userId: foundUser._id }, process.env.DB_PASSWORD, { expiresIn: "1h" });
-                return res.status(200).json({msg: "ok", token: token})
+                return res.status(200).json({msg: "ok", token: token, role: foundUser.role, name: foundUser.name})
             }
         }
     } catch (error) {
         console.log(error)
         return res.status(500).json({msg: "Error: interno del servidor."})
+    }
+}
+
+
+async function tokenRenewal(req, res) {
+    try {
+        const token = req.body.token;
+        if (!token) {
+            return res.status(401).json({ msg: "Error: no estás autenticado" });
+        } else {
+            let tokenDecoded
+            try {
+                tokenDecoded = jwt.verify(token, process.env.DB_PASSWORD);
+            } catch (error) {
+                console.log(error);
+                return res.status(500).json({ msg: "Error: token caducado o erróneo." });
+            }
+            const foundPetitionerNewToken = await User.findById(tokenDecoded.userId);
+            if (!foundPetitionerNewToken) {
+				return res.status(401).json({ msg: "Error: token caducado o erróneo" });
+			} else {
+                const newToken = jwt.sign({ userId: foundPetitionerNewToken._id }, process.env.DB_PASSWORD, {
+					expiresIn: "1h",
+				});
+				return res
+					.status(200)
+					.json({
+						msg: "ok",
+						token: newToken,
+						role: foundPetitionerNewToken.role,
+						name: foundPetitionerNewToken.name,
+					});
+			}
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ msg: "Error: interno del servidor." });
     }
 }
 
@@ -121,6 +158,7 @@ module.exports = {
 	modifyUser,
 	deleteOneUser,
 	login,
+    tokenRenewal,
 	signup,
 	registerByAdmin,
 };

@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { findAllInfluencers, insertInfluencer, modifyInfluencer, deleteOneInfluencer } = require("../controllers/influencer.controller");
+const { findAllInfluencers, findOneInfluencerById, insertInfluencer, modifyInfluencer, deleteOneInfluencer } = require("../controllers/influencer.controller");
 const { isAuthenticated, isInfluencer, isAdmin, petitionerCanChangeInfluencer } = require("../middlewares/auth.middleware");
 
 router.get("/", isAuthenticated, findAllInfluencers);
+router.get("/:id", isAuthenticated, findOneInfluencerById);
 router.post("/", isInfluencer, insertInfluencer);
 router.post("/admin", isAdmin, insertInfluencer);
 router.patch("/:id", isInfluencer, petitionerCanChangeInfluencer, modifyInfluencer);

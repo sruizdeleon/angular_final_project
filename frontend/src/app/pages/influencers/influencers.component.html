@@ -1,1 +1,5 @@
-<p>influencers works!</p>
+<ul>
+    @for(influencer of influencerList; track influencer._id){
+        <app-influencer-miniature [influencer]="influencer"></app-influencer-miniature>
+    }
+</ul>
