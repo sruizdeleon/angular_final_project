@@ -1,0 +1,32 @@
+<div>
+    <div>
+        @if(visibilityInfluencerForm){
+            <button type="button" (click)="deactiveInfluencerForm()">Cerrar formulario Influencer</button>
+        } @else {
+            <button type="button" (click)="activeInfluencerForm()">Nuevo Influencer</button>
+        }
+        @if(visibilityRestaurantForm){
+            <button type="button" (click)="deactiveRestaurantForm()">Cerrar formulario Restaurante</button>
+        } @else {
+            <button type="button" (click)="activeRestaurantForm()">Nuevo Restaurante</button>
+        }
+    </div>
+    <div>
+        @if (visibilityInfluencerForm) {
+            <app-influencer-form-by-admin style="display: block"></app-influencer-form-by-admin>
+
+        } @else {
+            <app-influencer-form-by-admin style="display: none"></app-influencer-form-by-admin>
+
+        }
+    </div>
+    <div>
+        @if (visibilityRestaurantForm) {
+            <app-restaurant-form-by-admin style="display: block"></app-restaurant-form-by-admin>
+
+        } @else {
+            <app-restaurant-form-by-admin style="display: none"></app-restaurant-form-by-admin>
+
+        }
+    </div>
+</div>

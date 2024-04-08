@@ -1,0 +1,13 @@
+<li class="card">
+    <img [src]="restaurant?.images?.miniature" [alt]="restaurant?.name" class="card__img">
+    <div class="card__content">
+        <h2>{{restaurant?.name}}</h2>
+        <div class="card__scores-container">
+            <p class="card__scores">Sabor: ⭐{{restaurant?.influencerScores?.foodTaste}}</p>
+            <p class="card__scores">Decoración: ⭐{{restaurant?.influencerScores?.decoration}}</p>
+            <p class="card__scores">Servicio: ⭐{{restaurant?.influencerScores?.service}}</p>
+            <p class="card__scores">Calidad-Precio: ⭐{{restaurant?.influencerScores?.priceQuality}}</p>
+        </div>
+    </div>
+    <button class="button" routerLink="/restaurants/{{restaurant?._id}}">Ver más</button>
+</li>

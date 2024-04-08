@@ -1,8 +1,15 @@
-<form [formGroup]="loginForm" (ngSubmit)="doLogin()">
-    <input formControlName="email" type="email"/>
-    <br>
-    <input formControlName="password" [type]="hidePassword ? 'password': 'text'"/>
-    <button (click)="hidePassword=!hidePassword">👁️</button>
-    <br>
-    <button type="submit">Login</button>
+<form class="form" [formGroup]="loginForm" (ngSubmit)="doLogin()">
+    <h1 class="form__title">Login</h1>
+    <input class="form__text-input" formControlName="email" type="email"/>
+    <div class="form__password-input">
+        <input class="form__password-input--text" formControlName="password" [type]="hidePassword ? 'password': 'text'"/>
+        <button class="form__password-input--icon" type="button" (click)="hidePassword=!hidePassword">
+            @if (hidePassword) {
+                👁️
+            } @else {
+                🛡️
+            }
+        </button>
+    </div>
+    <button class="button" type="submit">Login</button>
 </form>

@@ -1,0 +1,38 @@
+@if (influencer) {
+    <li class="card">
+        <div class="card__header" style="background-image: url({{influencer.images.frontPage}});">
+        </div>
+        <div class="card__body">
+            <div class="card__columns--logo">
+                <img class="card__logo" [src]="influencer.images.logo"/>
+            </div>
+            <div class="card__columns">
+                <div class="card__content">
+                    <h3>Nombre:</h3>
+                    <p>{{influencer.nickName}}</p>
+                </div>
+                <div class="card__content">
+                    <h3>Cuenta de Instagram:</h3>
+                    <p>{{influencer.accountIG}}</p>
+                </div>
+                <div class="card__content">
+                    <h3>Segidores:</h3>
+                    <p>{{"+"+influencer.subscribers}}</p>
+                </div>
+            </div>
+            <div class="card__columns">
+                <div class="card__content">
+                    <h3>Descripción de cuenta:</h3>
+                    <p>{{influencer.description}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card__footer">
+            <app-go-back class="card__button"></app-go-back>
+            <button  class="card__button" (click)="onDelete()">Eliminar</button>
+            <button  class="card__button" (click)="onEdit(influencer)">Editar</button>
+        </div>
+    </li>
+} @else{
+    <p>Loading...</p>
+}

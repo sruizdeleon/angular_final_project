@@ -1,3 +1,4 @@
+import { UserService } from './../../services/users/user.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,5 +9,6 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+
 
 }

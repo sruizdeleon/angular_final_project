@@ -3,10 +3,20 @@ const Influencer = require("../models/influencer.model");
 async function findAllInfluencers(req, res) {
 	try {
 		const influencers = await Influencer.find();
-		return res.json(influencers);
+		return res.status(200).json(influencers);
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json({ msg: "Error: interno del servidor al buscar los influencers." });
+	}
+}
+
+async function findOneInfluencerById(req, res) {
+	try {
+		const influencer = await Influencer.findById(req.params.id);
+		return res.json(influencer);
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({ msg: "Error: interno del servidor al buscar el influencer."});
 	}
 }
 
@@ -33,11 +43,11 @@ async function insertInfluencer(req, res) {
 				// atributo que sólo puede enviar el admin con id de usuario.
 			};
 		}
-		await newInfluencer.save();
-		return res.json({ msg: "Influencer guardado con éxito." });
+		const newInfluencerSaved = await newInfluencer.save();
+		return res.json({ msg: "Influencer guardado con éxito.", data: newInfluencerSaved });
 	} catch (error) {
 		console.log(error);
-		return res.status(500).json({ msg: "Error: interno del servidor al crear el influencer." });
+		return res.status(500).json({ msg: "Error: interno del servidor al crear el influencer."});
 	}
 }
 
@@ -90,6 +100,7 @@ async function deleteOneInfluencer(req, res) {
 
 module.exports = {
 	findAllInfluencers,
+	findOneInfluencerById,
 	insertInfluencer,
 	modifyInfluencer,
 	deleteOneInfluencer,

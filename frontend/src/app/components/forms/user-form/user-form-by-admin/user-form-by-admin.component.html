@@ -1,0 +1,66 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <fieldset>
+        <label for="name">Nombre</label><br>
+        <input type="text" formControlName="name">
+        @if(!userForm.get("name")?.valid && userForm.get("name")?.dirty) {
+            <div>
+                Tiene que tener mínimo 4 caracteres.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="surname">Apellidos</label><br>
+        <input type="text" formControlName="surname">
+        @if(!userForm.get("surname")?.valid && userForm.get("surname")?.dirty) {
+            <div>
+                Tiene que tener mínimo 4 caracteres.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="email">Email</label><br>
+        <input type="email" formControlName="email">
+        @if(!userForm.get("email")?.valid && userForm.get("email")?.dirty) {
+            <div>
+                Tiene que tener mínimo 4 caracteres.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="password">Contraseña</label><br>
+        <input type="password" formControlName="password">
+        @if(!userForm.get("password")?.valid && userForm.get("password")?.dirty) {
+            <div>
+                Tiene que tener mínimo 4 caracteres.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="phoneNumber">Número de teléfono</label><br>
+        <input type="number" formControlName="phoneNumber">
+        @if(!userForm.get("phoneNumber")?.valid && userForm.get("phoneNumber")?.dirty) {
+            <div>
+                Tiene que tener mínimo 4 caracteres.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="role">Role</label><br>
+        <input type="text" formControlName="role">
+        @if(!userForm.get("role")?.valid && userForm.get("role")?.dirty) {
+            <div>
+                Tiene que tener mínimo 4 caracteres.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="enable">Activo</label><br>
+        <input type="text" formControlName="enable">
+        @if(!userForm.get("enable")?.valid && userForm.get("enable")?.dirty) {
+            <div>
+                Tiene que tener mínimo 4 caracteres.
+            </div>
+        }
+    </fieldset>
+    <button type="submit" [disabled]="!userForm.valid">Guardar</button>
+</form>

@@ -8,14 +8,20 @@ const User = require("../models/user.model");
 async function isAuthenticated(req, res, next) {
 	try {
 		const token = req.query.token;
+		console.log("Token recibidi:", token);
 		if (!token) {
+			console.log("No estas autenticado");
+			console.log("No estas autenticado");
 			return res.status(401).json({ msg: "Error: no estás autenticado" });
 		} else {
+			console.log("Entro a decodificar");
 			const tokenDecoded = jwt.verify(token, process.env.DB_PASSWORD);
 			const petitionerUserId = tokenDecoded.userId;
+			console.log("Terminé de decodificar");
 			const foundPetitionerUser = await User.findById(petitionerUserId);
+			console.log("Termino de buscar usuario");
 			if (!foundPetitionerUser) {
-				return res.status(401).json({ msg: "Error: token no valido" });
+				return res.status(401).json({ msg: "Error: token no valido"});
 			} else {
 				req.body["petitionerUserId"] = new ObjectId(petitionerUserId);
 				next();

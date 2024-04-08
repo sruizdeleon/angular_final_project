@@ -1,0 +1,131 @@
+<form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()">
+    @if(newRestaurantAdmin._id !== ""){
+        <p>Id del Restaurante</p>
+        <p>{{newRestaurantAdmin._id}}</p>
+    }
+    <fieldset>
+        <label for="name">Nombre del restaurante</label><br>
+        <input type="text" formControlName="name">
+        @if(!restaurantForm.get("name")?.valid && restaurantForm.get("name")?.dirty) {
+            <div>
+                Tiene que tener mínimo 2 caracteres y un máximo de 255.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="phoneNumber">Teléfono de contacto</label><br>
+        <input type="number" formControlName="phoneNumber">
+        @if(!restaurantForm.get("phoneNumber")?.valid && restaurantForm.get("phoneNumber")?.dirty) {
+            <div>
+                Tiene que tener mínimo 2 caracteres y un máximo de 255.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="frontPage">Imagen de portada.</label><br>
+        <input type="text" formControlName="frontPage">
+        @if(!restaurantForm.get("frontPage")?.valid && restaurantForm.get("frontPage")?.dirty) {
+            <div>
+                Tiene que tener mínimo 1 caracteres y un máximo de 400.
+            </div>
+        }
+        <br><label for="miniature">Imagen de miniatura.</label><br>
+        <input type="text" formControlName="miniature">
+        @if(!restaurantForm.get("miniature")?.valid && restaurantForm.get("miniature")?.dirty) {
+            <div>
+                Tiene que tener mínimo de 10 suscriptores.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="street">Dirección</label><br>
+        <input type="text" formControlName="street">
+        @if(!restaurantForm.get("street")?.valid && restaurantForm.get("street")?.dirty) {
+            <div>
+                Tiene que tener mínimo de 10 suscriptores.
+            </div>
+        }
+        <br><label for="postalCode">Código postal</label><br>
+        <input type="number" formControlName="postalCode">
+        @if(!restaurantForm.get("postalCode")?.valid && restaurantForm.get("postalCode")?.dirty) {
+            <div>
+                Tiene que tener mínimo de 10 suscriptores.
+            </div>
+        }
+        <br><label for="population">Población</label><br>
+        <input type="text" formControlName="population">
+        @if(!restaurantForm.get("population")?.valid && restaurantForm.get("population")?.dirty) {
+            <div>
+                Tiene que tener mínimo de 10 suscriptores.
+            </div>
+        }
+        <br><label for="province">Provincia</label><br>
+        <input type="text" formControlName="province">
+        @if(!restaurantForm.get("province")?.valid && restaurantForm.get("province")?.dirty) {
+            <div>
+                Tiene que tener mínimo de 10 suscriptores.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="minPrice">Precio mínimo.</label><br>
+        <input type="number" formControlName="minPrice">
+        @if(!restaurantForm.get("minPrice")?.valid && restaurantForm.get("minPrice")?.dirty) {
+            <div>
+                Tiene que tener un código alfanumérico de 24 digitos.
+            </div>
+        }
+        <br><label for="maxPrice">Precio máximo.</label><br>
+        <input type="number" formControlName="maxPrice">
+        @if(!restaurantForm.get("maxPrice")?.valid && restaurantForm.get("maxPrice")?.dirty) {
+            <div>
+                Tiene que tener un código alfanumérico de 24 digitos.
+            </div>
+        }
+    </fieldset>
+    <fieldset>
+        <label for="foodTaste">Sabor de la comida</label><br>
+        <input type="number" formControlName="foodTaste">
+        @if(!restaurantForm.get("foodTaste")?.valid && restaurantForm.get("foodTaste")?.dirty) {
+            <div>
+                Tiene que ser una url con un mínimo de 10 caracteres.
+            </div>
+        }
+        <br><label for="decoration">Decoración del restaurante</label><br>
+        <input type="number" formControlName="decoration">
+        @if(!restaurantForm.get("decoration")?.valid && restaurantForm.get("decoration")?.dirty) {
+            <div>
+                Tiene que ser una url con un mínimo de 10 caracteres.
+            </div>
+        }
+        <br><label for="service">Servicio</label><br>
+        <input type="number" formControlName="service">
+        @if(!restaurantForm.get("service")?.valid && restaurantForm.get("service")?.dirty) {
+            <div>
+                Tiene que ser una url con un mínimo de 10 caracteres.
+            </div>
+        }
+        <br><label for="priceQuality">Calidad precio</label><br>
+        <input type="number" formControlName="priceQuality">
+        @if(!restaurantForm.get("priceQuality")?.valid && restaurantForm.get("priceQuality")?.dirty) {
+            <div>
+                Tiene que ser una url con un mínimo de 10 caracteres.
+            </div>
+        }
+    </fieldset>
+    @if(userRole === "admin"){
+        <fieldset>
+            <label for="influencerId">Id de influencer.</label><br>
+            <input type="text" formControlName="influencerId">
+            @if(!restaurantForm.get("influencerID")?.valid && restaurantForm.get("influencerID")?.dirty) {
+                <div>
+                    Tiene que ser una url con un mínimo de 10 caracteres.
+                </div>
+            }
+        </fieldset>
+    }
+    <div>
+        <button type="submit">Guardar</button>
+        <button type="button" (click)="onClear()">Limpiar</button>
+    </div>
+</form>
